@@ -1,0 +1,160 @@
+<!doctype html>
+<!-- 앤유 팬 클립 사이트의 화면 구조를 정의합니다. -->
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>앤유 클립</title>
+    <meta
+      name="description"
+      content="앤유 방송 바로가기, 프로필, 소셜 링크, 클립을 한 곳에서 볼 수 있는 팬 사이트입니다."
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">KU ANDYOU</p>
+        <h1>앤유</h1>
+        <p class="hero-lead">
+          보랏빛 우주 감성의 라이브 토크쇼. 말이 많고, 시나리오와 그림을 좋아하는
+          앤유의 방송과 클립을 모아둔 공간입니다.
+        </p>
+        <div class="header-links" aria-label="바로가기">
+          <a
+            class="stream-link"
+            href="https://chzzk.naver.com/7f43db49e367d87397c3a38d57dad71f"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <span>방송 바로가기</span>
+            <span class="live-badge" id="liveBadge" hidden>LIVE</span>
+          </a>
+          <a class="social-link" href="https://x.com/Ku_10617" target="_blank" rel="noreferrer">X</a>
+          <a class="social-link" href="https://www.youtube.com/@ku_10617" target="_blank" rel="noreferrer">YouTube</a>
+          <a class="social-link" href="https://www.tiktok.com/@ku10617?_t=ZS-9601t6yyScC" target="_blank" rel="noreferrer">TikTok</a>
+          <a class="social-link" href="https://discord.com/invite/kryKRuhds9" target="_blank" rel="noreferrer">Discord</a>
+        </div>
+      </div>
+      <figure class="hero-visual">
+        <img src="./images/andyou-full.png" alt="보랏빛 우주 배경 앞에 선 앤유 전신 이미지" />
+      </figure>
+    </header>
+
+    <main>
+      <section class="profile-section" aria-labelledby="profileTitle">
+        <div>
+          <p class="section-kicker">PROFILE</p>
+          <h2 id="profileTitle">앤유 정보</h2>
+          <p class="profile-copy">
+            냉면을 좋아하고 유부초밥은 싫어합니다. 생일은 12월 16일이며,
+            이야기를 만들고 그리는 취미가 방송의 분위기와 이어집니다.
+          </p>
+        </div>
+        <dl class="profile-grid">
+          <div>
+            <dt>키</dt>
+            <dd>161cm</dd>
+          </div>
+          <div>
+            <dt>좋아하는 음식</dt>
+            <dd>냉면</dd>
+          </div>
+          <div>
+            <dt>싫어하는 음식</dt>
+            <dd>유부초밥</dd>
+          </div>
+          <div>
+            <dt>취미</dt>
+            <dd>시나리오, 그림</dd>
+          </div>
+          <div>
+            <dt>방송 포인트</dt>
+            <dd>말이 많다</dd>
+          </div>
+          <div>
+            <dt>취향</dt>
+            <dd>어른 취향 토크</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="schedule-section" aria-labelledby="scheduleTitle">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">NEXT WEEK</p>
+            <h2 id="scheduleTitle">다음주 방송 스케줄</h2>
+          </div>
+          <p class="schedule-note">치지직 방송 기준</p>
+        </div>
+        <div class="schedule-grid" aria-label="다음주 방송 일정">
+          <article class="schedule-card">
+            <p>화요일</p>
+            <strong>오후 6시 - 12시</strong>
+          </article>
+          <article class="schedule-card">
+            <p>목요일</p>
+            <strong>오후 8시 - 10시</strong>
+          </article>
+          <article class="schedule-card">
+            <p>토요일</p>
+            <strong>오후 8시 - 9시</strong>
+          </article>
+        </div>
+      </section>
+
+      <section class="clips-section" aria-labelledby="clipsTitle">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">CLIPS</p>
+            <h2 id="clipsTitle">앤유 클립</h2>
+          </div>
+          <p id="resultCount">클립을 불러오는 중입니다.</p>
+        </div>
+        <section class="clip-grid" id="clipGrid" aria-live="polite"></section>
+      </section>
+
+      <section class="empty-state" id="emptyState" hidden>
+        <h2>표시할 클립이 없습니다</h2>
+        <p>clips.json에 클립 정보를 추가하면 여기에 표시됩니다.</p>
+      </section>
+    </main>
+
+    <footer class="site-footer">애플파이 - asoul122@naver.com</footer>
+
+    <section class="player-modal" id="playerModal" hidden>
+      <div class="player-backdrop" data-close-player></div>
+      <article class="player-panel" role="dialog" aria-modal="true" aria-labelledby="playerTitle">
+        <div class="player-head">
+          <div>
+            <p class="player-kicker">앤유 클립</p>
+            <h2 id="playerTitle">클립 재생</h2>
+          </div>
+          <button class="close-button" type="button" data-close-player>닫기</button>
+        </div>
+        <div class="player-frame-wrap">
+          <video id="localPlayer" controls playsinline hidden></video>
+          <iframe
+            id="clipPlayer"
+            title="치지직 클립 플레이어"
+            allow="autoplay; fullscreen; picture-in-picture"
+            allowfullscreen
+            hidden
+          ></iframe>
+        </div>
+        <a class="external-player-link" id="externalPlayerLink" target="_blank" rel="noreferrer">치지직에서 보기</a>
+      </article>
+    </section>
+
+    <template id="clipCardTemplate">
+      <article class="clip-card">
+        <button class="clip-open" type="button">
+          <video class="thumb-video" muted preload="metadata" playsinline></video>
+        </button>
+        <p class="clip-label"></p>
+      </article>
+    </template>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
