@@ -111,7 +111,7 @@ begin
     profile_items = excluded.profile_items,
     schedule_items = excluded.schedule_items;
 
-  delete from public.clips;
+  delete from public.clips where true;
 
   insert into public.clips (
     title,

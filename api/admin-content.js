@@ -74,12 +74,13 @@ async function supabaseRequest(supabaseUrl, serviceKey, path, options) {
     body: options.body === undefined ? undefined : JSON.stringify(options.body)
   });
 
+  const text = await response.text();
+
   if (!response.ok) {
-    throw new Error(`Supabase HTTP ${response.status}`);
+    throw new Error(`Supabase HTTP ${response.status}: ${text.slice(0, 1000)}`);
   }
 
   if (response.status === 204) return null;
-  const text = await response.text();
   return text ? JSON.parse(text) : null;
 }
 
