@@ -1,4 +1,4 @@
-// 앤유 클립 목록과 라이브 표시, 영상 모달을 제어합니다.
+// ku앤유 클립 목록과 라이브 표시, 영상 모달을 제어합니다.
 const state = {
   clips: []
 };
@@ -14,10 +14,13 @@ const playerTitle = document.querySelector("#playerTitle");
 const externalPlayerLink = document.querySelector("#externalPlayerLink");
 const streamLink = document.querySelector(".stream-link");
 const liveBadge = document.querySelector("#liveBadge");
+const profileSection = document.querySelector(".profile-section");
+const profileToggle = document.querySelector(".profile-toggle");
+const profileDetails = document.querySelector("#profileDetails");
 
 const fallbackClips = [
   {
-    title: "앤유 클립",
+    title: "ku앤유 클립",
     url: "https://chzzk.naver.com/7f43db49e367d87397c3a38d57dad71f",
     video: ""
   }
@@ -40,6 +43,7 @@ async function init() {
   }
 
   renderClips();
+  initProfileToggle();
 
   document.querySelectorAll("[data-close-player]").forEach((element) => {
     element.addEventListener("click", closePlayer);
@@ -67,9 +71,22 @@ function setLiveStatus(isLive) {
   streamLink.classList.toggle("is-live", isLive);
   streamLink.setAttribute(
     "aria-label",
-    isLive ? "앤유 방송 바로가기, 현재 방송 중" : "앤유 방송 바로가기"
+    isLive ? "ku앤유 방송 바로가기, 현재 방송 중" : "ku앤유 방송 바로가기"
   );
   liveBadge.hidden = !isLive;
+}
+
+function initProfileToggle() {
+  if (!profileSection || !profileToggle || !profileDetails) return;
+
+  profileToggle.addEventListener("click", () => {
+    const isOpen = profileToggle.getAttribute("aria-expanded") === "true";
+    profileToggle.setAttribute("aria-expanded", String(!isOpen));
+    profileToggle.querySelector("span").textContent = isOpen ? "정보 보기" : "정보 닫기";
+    profileSection.classList.toggle("is-open", !isOpen);
+    profileDetails.setAttribute("aria-hidden", String(isOpen));
+    profileDetails.hidden = isOpen;
+  });
 }
 
 function renderClips() {

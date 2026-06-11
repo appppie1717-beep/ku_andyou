@@ -1,4 +1,4 @@
-/* 앤유 팬 클립 사이트의 보랏빛 시각 스타일을 정의합니다. */
+/* ku앤유 팬 클립 사이트의 보랏빛 시각 스타일을 정의합니다. */
 :root {
   color-scheme: light;
   --bg: #f7f2ff;
@@ -92,8 +92,7 @@ h2 {
   line-height: 1.15;
 }
 
-.hero-lead,
-.profile-copy {
+.hero-lead {
   margin: 18px 0 0;
   color: var(--muted);
   font-size: 17px;
@@ -200,7 +199,72 @@ main {
   display: grid;
   grid-template-columns: minmax(0, 0.78fr) minmax(0, 1fr);
   gap: 24px;
+  align-items: start;
   padding: clamp(22px, 4vw, 34px);
+}
+
+.profile-summary {
+  display: grid;
+  gap: 14px;
+}
+
+.profile-toggle {
+  display: inline-grid;
+  grid-auto-flow: column;
+  place-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: fit-content;
+  min-height: 42px;
+  border: 1px solid rgba(125, 77, 228, 0.28);
+  border-radius: 8px;
+  padding: 0 15px;
+  background: var(--panel-strong);
+  color: var(--accent-dark);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 0 10px 24px rgba(63, 42, 103, 0.1);
+}
+
+.profile-toggle:hover {
+  text-decoration: underline;
+}
+
+.profile-toggle-icon {
+  width: 9px;
+  height: 9px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg) translateY(-2px);
+  transition: transform 180ms ease;
+}
+
+.profile-section.is-open .profile-toggle-icon {
+  transform: rotate(225deg) translate(-1px, -1px);
+}
+
+.profile-slide {
+  display: block;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-8px);
+  transition:
+    max-height 280ms ease,
+    opacity 220ms ease,
+    transform 260ms ease;
+}
+
+.profile-slide:not([hidden]) {
+  max-height: 360px;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.profile-slide[hidden] {
+  display: block;
 }
 
 .profile-grid {
