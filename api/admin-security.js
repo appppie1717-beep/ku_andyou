@@ -45,6 +45,14 @@ function verifyPassword(input, expected) {
 }
 
 async function readJsonBody(request, maxBodyBytes = 80_000) {
+  try {
+    if (request.body !== undefined) {
+      return normalizeParsedBody(request.body);
+    }
+  } catch (error) {
+    return null;
+  }
+
   let raw = "";
 
   for await (const chunk of request) {
@@ -59,6 +67,20 @@ async function readJsonBody(request, maxBodyBytes = 80_000) {
   } catch (error) {
     return null;
   }
+}
+
+function normalizeParsedBody(body) {
+  if (body === null) return null;
+  if (Buffer.isBuffer(body)) {
+    return JSON.parse(body.toString("utf8") || "{}");
+  }
+  if (typeof body === "string") {
+    return JSON.parse(body || "{}");
+  }
+  if (typeof body === "object") {
+    return body;
+  }
+  return null;
 }
 
 module.exports = {

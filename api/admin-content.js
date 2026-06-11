@@ -41,6 +41,7 @@ module.exports = async function handler(request, response) {
     response.setHeader("Cache-Control", "no-store");
     response.status(200).json(savedContent);
   } catch (error) {
+    console.error("Unable to save admin content", error);
     response.status(502).json({ error: "Unable to save content" });
   }
 };
