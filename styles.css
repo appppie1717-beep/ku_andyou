@@ -529,6 +529,220 @@ main {
   color: #ffffff;
 }
 
+.admin-fab {
+  position: fixed;
+  right: 14px;
+  top: 12px;
+  z-index: 15;
+  min-height: 32px;
+  border: 1px solid rgba(125, 77, 228, 0.2);
+  border-radius: 8px;
+  padding: 0 10px;
+  background: rgba(255, 255, 255, 0.58);
+  color: rgba(86, 48, 175, 0.72);
+  font: inherit;
+  font-size: 11px;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(63, 42, 103, 0.08);
+  opacity: 0.52;
+  backdrop-filter: blur(10px);
+  transition:
+    opacity 160ms ease,
+    background 160ms ease,
+    color 160ms ease;
+}
+
+.admin-fab:hover,
+.admin-fab:focus-visible {
+  background: #ffffff;
+  color: var(--accent-dark);
+  opacity: 1;
+}
+
+.admin-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+}
+
+.admin-modal[hidden] {
+  display: none;
+}
+
+.admin-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(32, 26, 43, 0.74);
+}
+
+.admin-panel {
+  position: relative;
+  z-index: 1;
+  width: min(880px, 100%);
+  max-height: calc(100vh - 36px);
+  overflow: auto;
+  border-radius: 8px;
+  background: var(--panel-strong);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.34);
+}
+
+.admin-head,
+.admin-status-row,
+.admin-section-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.admin-head {
+  padding: 16px;
+  border-bottom: 1px solid var(--line);
+}
+
+.admin-head h2 {
+  font-size: 22px;
+}
+
+.admin-login,
+.admin-editor {
+  display: grid;
+  gap: 16px;
+  padding: 16px;
+}
+
+.admin-login[hidden],
+.admin-editor[hidden] {
+  display: none;
+}
+
+.admin-section {
+  display: grid;
+  gap: 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 14px;
+  background: rgba(247, 242, 255, 0.42);
+}
+
+.admin-section h3 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.admin-help,
+.admin-login-message,
+#adminStatus {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.admin-login label,
+.admin-editor label,
+.clip-edit-row label {
+  display: grid;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.admin-login input,
+.admin-editor input,
+.admin-editor textarea {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 10px 11px;
+  background: #ffffff;
+  color: var(--text);
+  font: inherit;
+  font-size: 14px;
+}
+
+.admin-editor textarea {
+  resize: vertical;
+  line-height: 1.55;
+}
+
+.admin-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.clip-editor-list {
+  display: grid;
+  gap: 12px;
+}
+
+.clip-edit-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 12px;
+  background: #ffffff;
+}
+
+.clip-edit-row .clip-wide {
+  grid-column: 1 / -1;
+}
+
+.clip-edit-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  grid-column: 1 / -1;
+  gap: 10px;
+}
+
+.clip-edit-actions label {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.clip-edit-actions input {
+  width: auto;
+}
+
+.admin-primary,
+.admin-secondary {
+  min-height: 40px;
+  border-radius: 8px;
+  padding: 0 14px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.admin-primary {
+  border: 1px solid var(--accent-dark);
+  background: var(--accent-dark);
+  color: #ffffff;
+}
+
+.admin-secondary {
+  border: 1px solid var(--line);
+  background: var(--panel-strong);
+  color: var(--text);
+}
+
+.admin-primary:disabled,
+.admin-secondary:disabled {
+  cursor: wait;
+  opacity: 0.68;
+}
+
 @keyframes slideIn {
   from {
     opacity: 0;
@@ -590,7 +804,10 @@ main {
   }
 
   .section-head,
-  .player-head {
+  .player-head,
+  .admin-head,
+  .admin-status-row,
+  .admin-section-title {
     align-items: stretch;
     flex-direction: column;
   }
@@ -602,5 +819,10 @@ main {
 
   .stream-link {
     grid-column: 1 / -1;
+  }
+
+  .admin-grid-2,
+  .clip-edit-row {
+    grid-template-columns: 1fr;
   }
 }

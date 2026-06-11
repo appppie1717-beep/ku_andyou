@@ -17,11 +17,11 @@
         <p class="eyebrow">KU ANDYOU</p>
         <h1>ku앤유</h1>
         <p class="hero-lead">
-          보랏빛 우주 감성의 라이브 토크쇼. 말이 많고, 시나리오와 그림을 좋아하는
-          ku앤유의 방송과 클립을 모아둔 공간입니다.
+          게임방송 하고싶대
         </p>
         <div class="header-links" aria-label="바로가기">
           <a
+            id="streamLink"
             class="stream-link"
             href="https://chzzk.naver.com/7f43db49e367d87397c3a38d57dad71f"
             target="_blank"
@@ -30,10 +30,10 @@
             <span>방송 바로가기</span>
             <span class="live-badge" id="liveBadge" hidden>LIVE</span>
           </a>
-          <a class="social-link" href="https://x.com/Ku_10617" target="_blank" rel="noreferrer">X</a>
-          <a class="social-link" href="https://www.youtube.com/@ku_10617" target="_blank" rel="noreferrer">YouTube</a>
-          <a class="social-link" href="https://www.tiktok.com/@ku10617?_t=ZS-9601t6yyScC" target="_blank" rel="noreferrer">TikTok</a>
-          <a class="social-link" href="https://discord.com/invite/kryKRuhds9" target="_blank" rel="noreferrer">Discord</a>
+          <a class="social-link" data-social-platform="x" href="https://x.com/Ku_10617" target="_blank" rel="noreferrer">X</a>
+          <a class="social-link" data-social-platform="youtube" href="https://www.youtube.com/@ku_10617" target="_blank" rel="noreferrer">YouTube</a>
+          <a class="social-link" data-social-platform="tiktok" href="https://www.tiktok.com/@ku10617?_t=ZS-9601t6yyScC" target="_blank" rel="noreferrer">TikTok</a>
+          <a class="social-link" data-social-platform="discord" href="https://discord.com/invite/kryKRuhds9" target="_blank" rel="noreferrer">Discord</a>
         </div>
       </div>
       <figure class="hero-visual">
@@ -52,7 +52,7 @@
           </button>
         </div>
         <div class="profile-slide" id="profileDetails" aria-hidden="true" hidden>
-          <dl class="profile-grid">
+          <dl class="profile-grid" id="profileGrid">
             <div>
               <dt>키</dt>
               <dd>161cm</dd>
@@ -87,9 +87,9 @@
             <p class="section-kicker">NEXT WEEK</p>
             <h2 id="scheduleTitle">다음주 방송 스케줄</h2>
           </div>
-          <p class="schedule-note">치지직 방송 기준</p>
+          <p class="schedule-note" id="scheduleNote">치지직 방송 기준</p>
         </div>
-        <div class="schedule-grid" aria-label="다음주 방송 일정">
+        <div class="schedule-grid" id="scheduleGrid" aria-label="다음주 방송 일정">
           <article class="schedule-card">
             <p>화요일</p>
             <strong>오후 6시 - 12시</strong>
@@ -122,7 +122,9 @@
       </section>
     </main>
 
-    <footer class="site-footer">애플파이 - asoul122@naver.com</footer>
+    <footer class="site-footer" id="siteFooter">애플파이 - asoul122@naver.com</footer>
+
+    <button class="admin-fab" id="adminOpen" type="button">관리자 설정</button>
 
     <section class="player-modal" id="playerModal" hidden>
       <div class="player-backdrop" data-close-player></div>
@@ -145,6 +147,87 @@
           ></iframe>
         </div>
         <a class="external-player-link" id="externalPlayerLink" target="_blank" rel="noreferrer">치지직에서 보기</a>
+      </article>
+    </section>
+
+    <section class="admin-modal" id="adminModal" hidden>
+      <div class="admin-backdrop" data-close-admin></div>
+      <article class="admin-panel" role="dialog" aria-modal="true" aria-labelledby="adminTitle">
+        <div class="admin-head">
+          <div>
+            <p class="player-kicker">ADMIN</p>
+            <h2 id="adminTitle">사이트 수정</h2>
+          </div>
+          <button class="close-button" type="button" data-close-admin>닫기</button>
+        </div>
+
+        <form class="admin-login" id="adminLoginForm">
+          <label>
+            비밀번호
+            <input id="adminPassword" type="password" inputmode="numeric" autocomplete="current-password" required />
+          </label>
+          <p class="admin-login-message" id="adminLoginMessage" aria-live="polite"></p>
+          <button class="admin-primary" type="submit">관리자 로그인</button>
+        </form>
+
+        <form class="admin-editor" id="adminEditor" hidden>
+          <div class="admin-status-row">
+            <p id="adminStatus">로그인됨</p>
+            <button class="admin-secondary" id="adminLogout" type="button">로그아웃</button>
+          </div>
+
+          <div class="admin-section">
+            <h3>기본 정보</h3>
+            <label>
+              메인 문구
+              <input id="settingHeroLead" type="text" />
+            </label>
+            <label>
+              방송 링크
+              <input id="settingStreamUrl" type="url" />
+            </label>
+            <label>
+              스케줄 메모
+              <input id="settingScheduleNote" type="text" />
+            </label>
+            <label>
+              푸터
+              <input id="settingFooter" type="text" />
+            </label>
+          </div>
+
+          <div class="admin-section">
+            <h3>소셜 링크</h3>
+            <div class="admin-grid-2">
+              <label>X<input id="socialX" type="url" /></label>
+              <label>YouTube<input id="socialYoutube" type="url" /></label>
+              <label>TikTok<input id="socialTiktok" type="url" /></label>
+              <label>Discord<input id="socialDiscord" type="url" /></label>
+            </div>
+          </div>
+
+          <div class="admin-section">
+            <h3>프로필</h3>
+            <p class="admin-help">한 줄에 하나씩 `항목=내용` 형식으로 적습니다.</p>
+            <textarea id="profileText" rows="6"></textarea>
+          </div>
+
+          <div class="admin-section">
+            <h3>스케줄</h3>
+            <p class="admin-help">한 줄에 하나씩 `요일=시간` 형식으로 적습니다.</p>
+            <textarea id="scheduleText" rows="5"></textarea>
+          </div>
+
+          <div class="admin-section">
+            <div class="admin-section-title">
+              <h3>클립</h3>
+              <button class="admin-secondary" id="addClip" type="button">클립 추가</button>
+            </div>
+            <div class="clip-editor-list" id="clipEditorList"></div>
+          </div>
+
+          <button class="admin-primary" type="submit">저장</button>
+        </form>
       </article>
     </section>
 
