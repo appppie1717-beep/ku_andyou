@@ -14,9 +14,17 @@ ADMIN_PASSWORD
 DISCORD_WEBHOOK_URL
 C:\Users\USER\Desktop\앤유\api 키.md 파일 안에 넣어둔 디스코드 웹훅 URL을 붙여 넣으세요.
 
-Vercel Cron 대상 경로는 아래입니다.
+Vercel Hobby 플랜은 3분마다 실행되는 Cron을 배포할 수 없습니다.
 
-/api/discord-live-alert
+3분마다 확인하려면 외부 스케줄러에서 아래 URL을 GET으로 호출하세요.
+
+https://ku-andyou.vercel.app/api/discord-live-alert
+
+추천 설정.
+
+Method: GET
+Interval: 3 minutes
+Timeout: 30 seconds
 
 주의사항.
 DISCORD_WEBHOOK_URL과 SUPABASE_SERVICE_ROLE_KEY는 GitHub 코드에 넣지 말고 Vercel 환경변수에만 넣으세요.
