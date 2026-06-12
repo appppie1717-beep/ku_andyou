@@ -14,5 +14,9 @@ ADMIN_PASSWORD
 DISCORD_WEBHOOK_URL
 C:\Users\USER\Desktop\앤유\api 키.md 파일 안에 넣어둔 디스코드 웹훅 URL을 붙여 넣으세요.
 
+Vercel Cron 대상 경로는 아래입니다.
+
+/api/discord-live-alert
+
 주의사항.
 DISCORD_WEBHOOK_URL과 SUPABASE_SERVICE_ROLE_KEY는 GitHub 코드에 넣지 말고 Vercel 환경변수에만 넣으세요.

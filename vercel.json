@@ -1,7 +1,7 @@
 {
   "crons": [
     {
-      "path": "/api/check-live-alert",
+      "path": "/api/discord-live-alert",
       "schedule": "*/3 * * * *"
     }
   ]
