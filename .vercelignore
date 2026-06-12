@@ -1,0 +1,13 @@
+정보.md
+사진/
+사진/**
+클립/
+클립/**
+클립/*.mp4
+api 키.md
+api키.md
+.env
+.env.local
+.git/
+.vercel/
+AI_PROJECT_GUIDE.md
