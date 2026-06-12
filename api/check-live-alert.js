@@ -25,6 +25,18 @@ module.exports = async function handler(request, response) {
     const liveStatus = await fetchLiveStatus();
     const claim = await claimLiveAlert(supabaseUrl, serviceKey, liveStatus.live);
 
+    if (!claim.should_alert && liveStatus.live && (await shouldSendUnsentLiveAlert(supabaseUrl, serviceKey))) {
+      await sendAndMarkAlert(supabaseUrl, serviceKey, discordWebhookUrl);
+
+      response.setHeader("Cache-Control", "no-store");
+      response.status(200).json({
+        live: true,
+        alertSent: true,
+        reason: "unsent_live_alert"
+      });
+      return;
+    }
+
     if (!claim.should_alert) {
       response.setHeader("Cache-Control", "no-store");
       response.status(200).json({
@@ -35,14 +47,7 @@ module.exports = async function handler(request, response) {
       return;
     }
 
-    try {
-      await sendDiscordAlert(discordWebhookUrl);
-    } catch (error) {
-      await markAlertFailed(supabaseUrl, serviceKey, error.message);
-      throw error;
-    }
-
-    await markAlertSent(supabaseUrl, serviceKey);
+    await sendAndMarkAlert(supabaseUrl, serviceKey, discordWebhookUrl);
 
     response.setHeader("Cache-Control", "no-store");
     response.status(200).json({
@@ -55,6 +60,17 @@ module.exports = async function handler(request, response) {
     response.status(502).json({ error: "Unable to process live alert" });
   }
 };
+
+async function sendAndMarkAlert(supabaseUrl, serviceKey, discordWebhookUrl) {
+  try {
+    await sendDiscordAlert(discordWebhookUrl);
+  } catch (error) {
+    await markAlertFailed(supabaseUrl, serviceKey, error.message);
+    throw error;
+  }
+
+  await markAlertSent(supabaseUrl, serviceKey);
+}
 
 async function fetchLiveStatus() {
   const response = await fetch(CHZZK_CHANNEL_URL, {
@@ -75,6 +91,15 @@ async function fetchLiveStatus() {
     live: Boolean(content.openLive),
     channelName: content.channelName || null
   };
+}
+
+async function shouldSendUnsentLiveAlert(supabaseUrl, serviceKey) {
+  const rows = await supabaseRequest(supabaseUrl, serviceKey, `live_alert_state?id=eq.${STATE_ID}&select=last_alert_sent_at,last_live_started_at`, {
+    method: "GET"
+  });
+  const state = Array.isArray(rows) ? rows[0] : null;
+
+  return Boolean(state && state.last_live_started_at && !state.last_alert_sent_at);
 }
 
 async function claimLiveAlert(supabaseUrl, serviceKey, isLive) {
