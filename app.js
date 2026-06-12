@@ -491,6 +491,8 @@ async function handleAdminSave(event) {
     renderClips();
     fillAdminForm();
     adminStatus.textContent = "저장되었습니다.";
+    window.alert("수정되었습니다");
+    closeAdmin();
   } catch (error) {
     adminStatus.textContent = `저장 실패: ${error.message}`;
   } finally {
