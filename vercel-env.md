@@ -6,19 +6,26 @@ SUPABASE_URL
 https://qgjxyqehvftddypltzrd.supabase.co
 
 SUPABASE_SERVICE_ROLE_KEY
-C:\Users\USER\Desktop\앤유\api 키.md 파일 안의 service_role(secret) 값을 붙여 넣으세요.
+C:\Users\USER\Desktop\앤유\정보.md 파일 안의 service_role(secret) 값을 붙여 넣으세요.
 
 ADMIN_PASSWORD
 관리자 설정 로그인에 쓰는 비밀번호를 붙여 넣으세요.
 
 DISCORD_WEBHOOK_URL
-C:\Users\USER\Desktop\앤유\api 키.md 파일 안에 넣어둔 디스코드 웹훅 URL을 붙여 넣으세요.
+C:\Users\USER\Desktop\앤유\정보.md 파일 안에 넣어둔 디스코드 웹훅 URL을 붙여 넣으세요.
+
+KSAENG_DISCORD_WEBHOOK_URL
+C:\Users\USER\Desktop\크생이 방송.md 파일 안의 크생이 방송 알림 웹후크 주소를 붙여 넣으세요.
 
 Vercel Hobby 플랜은 3분마다 실행되는 Cron을 배포할 수 없습니다.
 
 3분마다 확인하려면 외부 스케줄러에서 아래 URL을 GET으로 호출하세요.
 
 https://ku-andyou.vercel.app/api/discord-live-alert
+
+크생이 방송 알림도 같은 방식으로 아래 URL을 GET으로 호출하세요.
+
+https://ku-andyou.vercel.app/api/ksaeng-discord-live-alert
 
 추천 설정.
 
