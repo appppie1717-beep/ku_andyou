@@ -9,9 +9,9 @@ const defaultSettings = {
   schedule_note: "치지직 방송 기준",
   footer_text: "애플파이 - asoul122@naver.com",
   social_links: [
-    { platform: "x", label: "X", url: "https://x.com/Ku_10617", is_visible: true },
+    { platform: "x", label: "X", url: "https://x.com/kuen_29", is_visible: true },
     { platform: "youtube", label: "YouTube", url: "https://www.youtube.com/@ku_10617", is_visible: true },
-    { platform: "tiktok", label: "TikTok", url: "https://www.tiktok.com/@ku10617?_t=ZS-9601t6yyScC", is_visible: true },
+    { platform: "tiktok", label: "TikTok", url: "https://www.tiktok.com/@ku10617?_t=ZS-981IbiPrETl", is_visible: true },
     { platform: "discord", label: "Discord", url: "https://discord.com/invite/kryKRuhds9", is_visible: true }
   ],
   profile_items: [
